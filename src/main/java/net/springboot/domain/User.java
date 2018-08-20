@@ -1,7 +1,19 @@
-package net.springboot.web;
+package net.springboot.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+	@Id
+	@GeneratedValue //id의 값을 가져와 1을 증가시켜줌
+	private Long id;
+	
+	@Column(nullable=false, length=20) //nullable가 false이면 NULL값이 들어갈 수 없다.
 	private String userId;
+	
 	private String password;
 	private String name;
 	private String email;
