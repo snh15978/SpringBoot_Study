@@ -24,28 +24,28 @@
     </ul>
   </div>
 </nav>
-    <h1>회원가입</h1>
-    <div class="container">
-		<form action="/create" method="post">
-		  <div class="form-group">
-		    <label for="userID">사용자 ID</label>
-		    <input type="text" class="form-control" name="userId" placeholder="Enter email">
-		  </div>
-		  <div class="form-group">
-		    <label for="userName">이름</label>
-		    <input type="text" class="form-control" name="name" placeholder="Enter name">
-		  </div>	  
-		  <div class="form-group">
-		    <label for="userEmail">이메일</label>
-		    <input type="email" class="form-control" name="email" placeholder="Enter email">
-		  </div>		  
-		  <div class="form-group">
-		    <label for="Password">Password</label> 
-		    <input type="password" class="form-control" name="Password" placeholder="Password">
-		  </div>
-		  <button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+	<div class="container">
+		<table class="table table-condensed">
+			<caption>사용자 목록</caption>
+			<thead>
+				<tr>
+					<th>사용자 아이디</th>
+					<th>이름</th>
+					<th>이메일</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#users}}
+				<tr>
+					<th scope="row">{{userId}}</th>
+					<td>{{name}}</td>
+					<td>{{email}}</td>
+				</tr>
+				{{/users}}
+			</tbody>
+		</table>
 	</div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
