@@ -8,12 +8,12 @@ import javax.persistence.Id;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue //id의 값을 가져와 1을 증가시켜줌
+	@GeneratedValue // id의 값을 가져와 1을 증가시켜줌
 	private Long id;
-	
-	@Column(nullable=false, length=20) //nullable가 false이면 NULL값이 들어갈 수 없다.
+
+	@Column(nullable = false, length = 20) // nullable가 false이면 NULL값이 들어갈 수 없다.
 	private String userId;
-	
+
 	private String password;
 	private String name;
 	private String email;
@@ -32,6 +32,12 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public void update(User newUser) {
+		this.password = newUser.password;
+		this.name = newUser.name;
+		this.email = newUser.email;
 	}
 
 	@Override
