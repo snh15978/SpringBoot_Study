@@ -11,7 +11,7 @@ public class User {
 	@GeneratedValue // id의 값을 가져와 1을 증가시켜줌
 	private Long id;
 
-	@Column(nullable = false, length = 20) // nullable가 false이면 NULL값이 들어갈 수 없다.
+	@Column(nullable = false, length = 20, unique=true) // nullable가 false이면 NULL값이 들어갈 수 없다.
 	private String userId;
 
 	private String password;
@@ -36,6 +36,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public void update(User newUser) {
