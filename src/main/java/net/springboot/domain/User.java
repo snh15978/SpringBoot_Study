@@ -11,12 +11,23 @@ public class User {
 	@GeneratedValue // id의 값을 가져와 1을 증가시켜줌
 	private Long id;
 
-	@Column(nullable = false, length = 20, unique=true) // nullable가 false이면 NULL값이 들어갈 수 없다.
+	@Column(nullable = false, length = 20, unique = true) // nullable가 false이면 NULL값이 들어갈 수 없다.
 	private String userId;
 
 	private String password;
 	private String name;
 	private String email;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public boolean matchId(Long newId) {
+		if (newId == null) {
+			return false;
+		}
+		return newId.equals(id);
+	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -26,8 +37,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getPassword() {
-		return password;
+	public boolean matchPassword(String newPassword) {
+		if (newPassword == null) {
+			return false;
+		}
+		return newPassword.equals(password);
 	}
 
 	public void setName(String name) {
@@ -36,14 +50,6 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public void update(User newUser) {
