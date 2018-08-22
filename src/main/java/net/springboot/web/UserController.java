@@ -38,11 +38,16 @@ public class UserController {
 			System.out.println("login failure");
 			return "redirect:/users/loginForm";
 		}
-
+		System.out.println("login success");
 		session.setAttribute("user", user);
 		return "redirect:/";
 	}
 	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/";
+	}
 	@PostMapping("")
 	public String create(User user) {
 		System.out.println("user : " + user);
