@@ -69,18 +69,15 @@ public class UserController {
 
 	@GetMapping("{id}/form")
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session) { // URL 끝 부분의 유저id를 받아옴
-
-		if (HttpSessionUtils.isLoginUser(session)) {
+		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "redirect:/users/loginForm";
 		}
 
 		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
-		
 		if(!sessionedUser.matchId(id)){
 			throw new IllegalStateException("You can't update another user");
 		}
 
-		//User user = userRepository.findOne(sessionedUser.getId());
 		User user = userRepository.findOne(id);
 		model.addAttribute("user", user);
 		return "/user/updateForm";
@@ -88,15 +85,13 @@ public class UserController {
 
 	@PutMapping("/{id}")
 	public String update(@PathVariable Long id, User updatedUser, HttpSession session) {
-
-		if (HttpSessionUtils.isLoginUser(session)) {
+		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "redirect:/users/loginForm";
 		}
-
-		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
 		
-		if(!sessionedUser.matchId(id)){
-			throw new IllegalStateException("You can't update another user");
+		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
+		if (!sessionedUser.matchId(id)) {
+			throw new IllegalStateException("You can't update the anther user");
 		}
 		
 		User user = userRepository.findOne(id);

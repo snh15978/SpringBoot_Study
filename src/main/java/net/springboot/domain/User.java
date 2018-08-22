@@ -22,15 +22,23 @@ public class User {
 		this.id = id;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
 	public boolean matchId(Long newId) {
 		if (newId == null) {
 			return false;
 		}
-		return newId.equals(id);
+		return newId.equals(getId());
 	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserId() {
+		return userId;
 	}
 
 	public void setPassword(String password) {
