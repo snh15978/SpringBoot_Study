@@ -14,27 +14,36 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class Question {
 	@Id
 	@GeneratedValue // id의 값을 가져와 1을 증가시켜줌
+	@JsonProperty
 	private Long id;
 
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
+	@JsonProperty
 	private User writer;
 
+	@JsonProperty
 	private String title;
 
 	@Lob
+	@JsonProperty
 	private String contents;
+
+	@JsonProperty
+	private Integer countOfAnswer = 0;
 
 	private LocalDateTime createDate;
 
-	@OneToMany(mappedBy="question") // 이름은 Answer의 ManyToBy의 이름을 주면 된다.
-	@OrderBy("id ASC")
+	@OneToMany(mappedBy = "question") // 이름은 Answer의 ManyToBy의 이름을 주면 된다.
+	@OrderBy("id DESC")
 	private List<Answer> answers;
-	
+
 	public Question() {
 	}
 
@@ -46,7 +55,7 @@ public class Question {
 		this.createDate = LocalDateTime.now();
 	}
 
-	public String getFromattedCreateDate() {
+	public String getFormattedCreateDate() {
 		if (createDate == null) {
 			return "";
 		}
@@ -65,6 +74,14 @@ public class Question {
 		}
 
 		return this.writer.equals(loginUser);
+	}
+
+	public void addAnswer() {
+		this.countOfAnswer += 1;
+	}
+
+	public void deleteAnswer() {
+		this.countOfAnswer -= 1;
 	}
 
 	@Override

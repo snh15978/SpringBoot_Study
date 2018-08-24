@@ -5,17 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 public class User {
 	@Id
 	@GeneratedValue // id의 값을 가져와 1을 증가시켜줌
+	@JsonProperty
 	private Long id;
 
 	@Column(nullable = false, length = 20, unique = true) // nullable가 false이면 NULL값이 들어갈 수 없다.
+	@JsonProperty
 	private String userId;
-
+	
+	@JsonIgnore
 	private String password;
+	
+	@JsonProperty
 	private String name;
+	
+	@JsonProperty	
 	private String email;
 
 	public void setId(Long id) {
