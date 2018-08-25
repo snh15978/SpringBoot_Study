@@ -21,10 +21,10 @@ public class AbstractEntity {
 	@GeneratedValue // id의 값을 가져와 1을 증가시켜줌
 	@JsonProperty
 	private Long id;
-	
+
 	@CreatedDate
 	private LocalDateTime createDate;
-	
+
 	@LastModifiedDate
 	private LocalDateTime modifiedDate;
 
@@ -33,10 +33,18 @@ public class AbstractEntity {
 	}
 
 	public String getFormattedCreateDate() {
-		if (createDate == null) {
+		return getFormattedDate(createDate, "yyyy.MM.dd HH:mm:ss");
+	}
+
+	public String getFormattedModifiedDate() {
+		return getFormattedDate(modifiedDate, "yyyy.MM.dd HH:mm:ss");
+	}
+
+	private String getFormattedDate(LocalDateTime dateTime, String format) {
+		if (dateTime == null) {
 			return "";
 		}
-		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+		return dateTime.format(DateTimeFormatter.ofPattern(format));
 	}
 
 	@Override
